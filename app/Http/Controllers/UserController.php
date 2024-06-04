@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-  
+
     public function Register_page(){
         return view('User.Register');
     }
@@ -23,7 +23,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email',
             'password'=>'required|confirmed|min:4'
         ]);
-      
+
         $user = User::create($userData);
         auth()->login($user);
         return redirect('/')->with('message','loggged in');
@@ -37,7 +37,13 @@ class UserController extends Controller
                 'password'=>'required'
             ]);
 
-           
+            if(auth()->attempt($userData)){
+                return redirect()->intended()->with('message', 'logged in sucessfully');
+            }else{
+                return back()->withErrors(['email'=>'invalid credentials']);
+            }
+
+
     }
 
 
@@ -46,4 +52,16 @@ class UserController extends Controller
         return back()->with('message','user loggged out');
 
     }
+
+
+
+  public function manage($user_id){
+    $user = User::findorfail($user_id);
+    $listings = $user->listing;
+    return view('Listing.manage',[
+        'listing' => $listings
+    ]);
+  }
+
+
 }

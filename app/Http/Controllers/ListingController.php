@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Illuminate\Cache\TagSet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Cache\TagSet;
 
 class ListingController extends Controller
 {
    public function index (){
-   
+
     return view ('Listing.index', [
         'listings' => Listing::latest()->tagfilter(request(['tag','search']))->paginate(3)
     ]);
@@ -45,12 +45,12 @@ class ListingController extends Controller
         $image_r_name = uniqid()."_".$imagename.".".$imageExt;
         $formData['logo'] = $image->storeAs('jobFiles/'.$imagename.'/',$image_r_name,'public');
        }
-
+       $formData['user_id'] = auth()->id();
        Listing::create($formData);
 
       return redirect('/')->with('message','job posted sucessfully');
-       
-        
+
+
    }
 
    public function edit($list_id){
@@ -81,14 +81,17 @@ class ListingController extends Controller
        $listing = Listing::findOrFail($list_id);
 
        $listing->update($updateData);
-       return redirect('/')->with('message','job updated sucessfully');
+       return redirect('/listing/manage/'.auth()->id())->with('message','job updated sucessfully');
    }
 
    public function destroy($list_id){
     $listing= Listing::findorfail($list_id);
     $listing->delete();
 
-    return redirect('/')->with('message','job has been Deleted');
-   }
+    return back()->with('message','job has been Deleted');
+
+}
+
+
 
 }

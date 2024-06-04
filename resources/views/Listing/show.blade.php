@@ -1,4 +1,4 @@
-    <x-layout> 
+    <x-layout>
 
     @include('partials.__search')
 
@@ -8,7 +8,7 @@
                     >
                         <img
                             class="w-48 mr-6 mb-6"
-                            src="{{asset('images/no-image.png')}}"
+                            src="{{$listing->logo ? asset('storage/'.$listing->logo):asset('images/no-image.png')}}"
                             alt=""
                         />
 
@@ -44,16 +44,5 @@
                     </div>
                 </x-card_tile_hd>
                 <div class="flex space-x-2 pt-6">
-    <!-- Edit Button -->
-    <button class="flex items-center px-4 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-md">
-       <a href="/listing/{{$listing->id}}/edit"> <i class="fas fa-edit mr-2"></i>
-        Edit</a>
-    </button>
-
-    <!-- Delete Button -->
-    <button class="flex items-center px-4 py-2 text-white bg-red-500 hover:bg-red-600 rounded-md">
-        <a href="/listing/{{$listing->id}}/edit">  <i class="fas fa-trash-alt mr-2"></i>
-        Delete</a>
-    </button>
 </div>
     </x-layout>

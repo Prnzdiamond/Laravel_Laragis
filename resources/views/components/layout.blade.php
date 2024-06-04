@@ -33,7 +33,7 @@
             @auth
                  <ul class="flex space-x-6 mr-6 text-lg">
                 <li>
-                    <a href="/listing/manage" class="hover:text-laravel"
+                    <a href="/listing/manage/{{auth()->user()->id}}" class="hover:text-laravel"
                         ><i class="fa-solid fa-srew"></i> Manage Listing</a
                     >
                 </li>
@@ -49,7 +49,7 @@
                         Logout</a
                     >
                 </li>
-            </ul>  
+            </ul>
              @else
                 <ul class="flex space-x-6 mr-6 text-lg">
                 <li>
@@ -63,7 +63,7 @@
                         Login</a
                     >
                 </li>
-            </ul> 
+            </ul>
 
             @endauth
         </nav>

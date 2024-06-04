@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('list_title');
             $table->string('tags');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('logo')->nullable();
             $table->string('company');
             $table->string('location');

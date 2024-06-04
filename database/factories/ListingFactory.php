@@ -19,6 +19,7 @@ class ListingFactory extends Factory
         return [
             'list_title' => fake()->sentence(),
             'tags' => 'Laravel,Internet,Virtual,Remote',
+            'user_id' => 4,
             'company' => fake()->company(),
             'location' => fake()->country(),
             'email' => fake()->companyEmail(),
