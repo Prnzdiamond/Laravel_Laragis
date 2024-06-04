@@ -58,7 +58,7 @@
                             <p>
                                 Don't have an account?
                                 <a href="/register_page" class="text-laravel"
-                                    >Register</a
+                                    >Register Now</a
                                 >
                             </p>
                         </div>
